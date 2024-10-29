@@ -2,9 +2,10 @@
 interface Props {
     name: string;
     url: string;
+    isBig?: boolean;
 }
 
-let { name, url } = Astro.props;
+let { name, url, isBig = false } = Astro.props;
 
 const id = url.split("/").at(-2);
 const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
@@ -12,10 +13,32 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
 
 <a 
     href={`/pokemons/${name}`}
-    class="rouned border flex flex-col justify-center items-center p-2">
+    class:list={[
+        `rounded flex flex-col justify-center items-center p-2`,
+        {
+            border: !isBig,
+        }
+        ]}
+    >
     <img 
-    alt={name}
-    src={imageSrc} 
+        transition:name=`${name}-image`
+        alt={name}
+        src={imageSrc} 
+        class:list={[ 
+            //isBig ? "w-26 h-26" : "w-16 h-16" 
+            {
+                'w-26 h-26': isBig,
+                'w-22 h-22': !isBig
+            }
+        ]}
     />
-    <span class="capitalize">{name}</span>
+    <span 
+        class:list={[
+            "capitalize",
+            {
+                "text-4xl text-blue-300": isBig,
+            }
+        ]}>
+        #{id} {name}
+    </span>
 </div>
