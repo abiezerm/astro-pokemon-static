@@ -1,4 +1,5 @@
 ---
+import Title from "@components/shared/Title.astro";
 import PokemonCard from "../components/PokemonCard.astro";
 import type { PokemonListResponse } from "../interfaces/pokemon-list";
 import MainLayout from "../layouts/MainLayout.astro";
@@ -12,12 +13,11 @@ const title = "Pokemon Static | Home";
 ---
 
 <MainLayout {title}>
-	<h1 class="text-3xl ">Pokemon List</h1>
-	<hr />
+	<Title>Pokemon List</Title>
 
 	<section 
 		aria-label="Pokemon List"
-		class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-5">
+		class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-5">
 
 		{
 			data.results.map(({name, url}) => 
